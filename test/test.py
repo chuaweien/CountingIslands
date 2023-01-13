@@ -1,5 +1,5 @@
 import unittest
-from run import IslandsCounting
+from src.run import IslandsCounting
 
 
 class TestingStringMethods(unittest.TestCase):
