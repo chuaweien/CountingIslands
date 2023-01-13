@@ -43,8 +43,9 @@ class IslandsCounting:
         with open(input_filepath, "r") as f:
             grid = [line.strip() for line in f.readlines()]
 
+        # if input is empty file
         if len(grid) == 0:
-            return "Input is empty!"
+            raise ValueError("Input is empty!")
 
         # validate inputs before proceeding
         validate_inputs(grid)
