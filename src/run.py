@@ -1,4 +1,5 @@
 from typing import List
+import sys
 
 
 def validate_rows(arr: List) -> None:
@@ -8,13 +9,19 @@ def validate_rows(arr: List) -> None:
     :param List arr: input 2D array
     :return None: None
     """
-    cols = len(arr[0])
+    n_elements = len(arr[0])
 
     for x, row in enumerate(arr):
-        assert len(row) == cols, "Row {} is not symmetrical!".format(x)
+        assert len(row) == n_elements, "Row {} is not symmetrical!".format(x)
 
 
-def dfs(lines: List, x: int, y: int):
+def validate_ascii(arr: List) -> None:
+    for x, row in enumerate(arr):
+        assert all(ord(
+            element) < 128 for element in row), "Row {} contains non-ascii characters".format(x)
+
+
+def dfs(lines: List, x: int, y: int) -> None:
     if x < 0 or y < 0 or x >= len(lines) or y >= len(lines[x]) or lines[x][y] != "1":
         return
 
@@ -51,6 +58,7 @@ def count_islands(input_filepath: str) -> int:
 
      # validate that each row has same number of columns
     validate_rows(lines)
+    validate_ascii(lines)
 
     islands_count = 0
 
@@ -63,5 +71,5 @@ def count_islands(input_filepath: str) -> int:
     return islands_count
 
 
-# print(count_islands("data/islands.txt"))
-print(count_islands("data/island_empty.txt"))
+if __name__ == "__main__":
+    print(count_islands(sys.argv[1]))
