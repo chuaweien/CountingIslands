@@ -46,7 +46,7 @@ class IslandsCounting:
         if len(grid) == 0:
             return "Input is empty!"
 
-            # validate inputs before proceeding
+        # validate inputs before proceeding
         validate_inputs(grid)
 
         islands_count = 0
