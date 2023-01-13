@@ -3,3 +3,6 @@
 
 # ignore data
 data/*
+
+# keep test data
+!data/test_data
