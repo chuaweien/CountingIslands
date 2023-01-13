@@ -1,24 +1,7 @@
 from typing import List
 import sys
 
-
-def validate_rows(arr: List) -> None:
-    """Ensure that each row in array has same number of elements.
-    If array is asymmetrical, it will output an error with row index.
-
-    :param List arr: input 2D array
-    :return None: None
-    """
-    n_elements = len(arr[0])
-
-    for x, row in enumerate(arr):
-        assert len(row) == n_elements, "Row {} is not symmetrical!".format(x)
-
-
-def validate_ascii(arr: List) -> None:
-    for x, row in enumerate(arr):
-        assert all(ord(
-            element) < 128 for element in row), "Row {} contains non-ascii characters".format(x)
+from validate import validate_inputs
 
 
 def dfs(lines: List, x: int, y: int) -> None:
@@ -56,9 +39,8 @@ def count_islands(input_filepath: str) -> int:
     if len(lines) == 0:
         return "Input is empty!"
 
-     # validate that each row has same number of columns
-    validate_rows(lines)
-    validate_ascii(lines)
+     # validate inputs before proceeding
+    validate_inputs(lines)
 
     islands_count = 0
 
