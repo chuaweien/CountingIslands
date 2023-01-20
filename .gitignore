@@ -1,6 +1,9 @@
-#ignore system files
+# ignore system files
 .DS_Store
 __pycache__
+
+# ignore build folder
+build/
 
 # ignore data
 data/*
