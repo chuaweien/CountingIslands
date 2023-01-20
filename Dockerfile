@@ -6,6 +6,10 @@ ARG HOME_DIR="/home/jovyan"
 ARG USER_UID=2222
 ARG USER_GID=2222
 
+ARG filepath
+RUN test -n "${filepath}" || (echo "filepath not set" && false)
+ENV filepath=${filepath}
+
 # install bash
 RUN apk update && apk add bash
 
@@ -23,10 +27,13 @@ COPY .  .
 # change ownership of files to user
 # and make shell script executable
 RUN chown -R ${PROJECT_USER} . && chgrp -R ${PROJECT_GROUP} . \
-    && chmod +x run.sh
+    && chmod +x run.sh \
+    && python setup.py install
 
 # change to project user
 USER ${PROJECT_USER}
 
-ENTRYPOINT [ "./run.sh" ]
+# RUN python setup.py install
+
+ENTRYPOINT ./run.sh ${filepath}
 
