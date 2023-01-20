@@ -1,12 +1,11 @@
 from typing import List
 
 
-def validate_inputs(arr: List) -> None:
-    """Ensure that each row in array has same number of elements.
-    If array is asymmetrical, it will output an error with row index.
+def validate_inputs(arr: List[str]) -> None:
+    """Checks the input grid for symmetry, ascii characters and elements only as "0" and "1".
+       This function loops through the input grid, for each row and performs the following checks.
 
-    :param List arr: input 2D array
-    :return None: None
+    :param List[str] arr: A list of strings to be validated i.e. input grid
     """
     n_elements = len(arr[0])
 

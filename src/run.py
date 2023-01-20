@@ -6,12 +6,14 @@ from src.validate import validate_inputs
 
 class IslandsCounting:
 
-    def dfs(self, grid: List[int], x: int, y: int) -> None:
-        """Using DFS to find all the "1" in the same island
+    def dfs(self, grid: List[str], x: int, y: int) -> None:
+        """Using Depth First Search (DFS) to find all the "1" in the same island by checking all 
+           the possible 8 directions. Does not return any output but mutates the input grid by 
+           replacing the found "1"s with "/"s to mark that it has been visited.
 
-        :param List grid: input grid
-        :param int x: x coordinate
-        :param int y: y coordinate
+        :param List[str] grid: List of strings containing "1"s and "0"s to represent the input grid
+        :param int x: An integer representing the x-coordinate of the starting point in the grid i.e. row
+        :param int y: An integer representing the y-coordinate of the starting point in the grid i.e. column
         """
         stack = [(x, y)]
 
@@ -29,20 +31,31 @@ class IslandsCounting:
             dirs = [(i, j) for i in search_x for j in search_y]
 
             for i, j in dirs:
+                # for each direction if element is "1", coordinates are added to stack
                 if 0 <= i < len(grid) and 0 <= j < len(grid[0]) and grid[i][j] == "1":
                     stack.append((i, j))
 
     def read_input_file(self, input_filepath: str) -> List[str]:
+        """Reads the input from a file and returns a list of strings, 
+           where each string represents a row of the grid.
+
+        :param str input_filepath: A string representing the filepath of the input file.
+        :return List[str]: List of strings containing "1"s and "0"s to represent the input grid
+        """
         with open(input_filepath, "r") as f:
             grid = [line.strip() for line in f.readlines()]
 
         return grid
 
     def count_islands(self, grid: List[str]) -> int:
-        """Count number of islands in input file using Depth First Search (DFS).
+        """Counts the number of islands present in a 2D grid represented as a list of strings using
+           DFS. The function first checks if the input is empty, if it is then it raises a 
+           ValueError. It also validates the input by calling the `validate_input` function.
 
-        :param str input_filepath: input filepath to .txt file
-        :return int: number of islands
+        :param List[str] grid: A list of strings representing the input grid, where each string 
+                               represents a row of the grid containing "1"s and "0"s
+        :raises ValueError: Input is empty
+        :return int: Final count of islands
         """
         # if input is empty file
         if len(grid) == 0:
@@ -52,8 +65,6 @@ class IslandsCounting:
         validate_inputs(grid)
 
         islands_count = 0
-        visited = [[False for _ in range(len(grid[0]))]
-                   for _ in range(len(grid))]
 
         for x, row in enumerate(grid):
             for y, col in enumerate(row):
