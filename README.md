@@ -4,7 +4,7 @@
 
 ## Introduction
 
-The task is to write a short program that count the number of islands.
+The goal of this program is to count the number of islands in a map represented by a 2D array. The program will take in the filepath of a text file as input, which contains a representation of the map using the characters "0" (water), "1" (land) and end-of-line. The program will read the file, process the data, and output an integer representing the number of islands present in the map.
 
 ## Folder Structure
 
